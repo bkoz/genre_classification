@@ -6,8 +6,10 @@ Component: download
 
 Needed to upgrade `wandb==0.12.17` in `download/conda.yml`
 
-Run command:
+Run commands:
 ```
 mlflow run . -P hydra_options="main.execute_steps='download'"
+
+mlflow run . -P hydra_options="main.execute_steps='download,preprocess,check_data,segregate,random_forest,evaluate'"
 ```
 
