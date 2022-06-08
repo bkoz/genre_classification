@@ -47,6 +47,9 @@ Set the environment variable HYDRA_FULL_ERROR=1 for a complete stack trace.
 ```
 
 ### Inference testing
+
+MacOS and RHEL x86_64
+
 ```
 conda create --name=test python=3.9.13 mlflow wandb
 
@@ -55,4 +58,53 @@ wandb artifact get genre_classification/my_artifact_root_test.csv:latest
   
 mlflow models predict -t json -i model/input_example.json -m model
 mlflow models predict -t csv -i artifacts/my_artifact_root_test.csv\:v0/my_artifact_root_test.csv -m model
+```
+
+MacOS M1
+```
+mlflow models predict -t json -i model/input_example.json -m model
+
+2022/06/08 12:53:16 INFO mlflow.models.cli: Selected backend for flavor 'python_function'
+2022/06/08 12:53:17 INFO mlflow.utils.conda: === Creating conda environment mlflow-68c0ec35f0d6ca2df4c3c3872e3d889149327a36 ===
+Collecting package metadata (repodata.json): done
+Solving environment: - 
+Found conflicts! Looking for incompatible packages.
+This can take several minutes.  Press CTRL-C to abort.
+failed                                                                                                                                                     
+Solving environment: - 
+Found conflicts! Looking for incompatible packages.
+This can take several minutes.  Press CTRL-C to abort.
+failed                                                                                                                                                     
+
+UnsatisfiableError: The following specifications were found to be incompatible with each other:
+
+Output in format: Requested package -> Available versions
+Note that strict channel priority may have removed packages required for satisfiability.
+
+Traceback (most recent call last):
+  File "/Users/koz/.local/miniforge3/envs/test/bin/mlflow", line 11, in <module>
+    sys.exit(cli())
+  File "/Users/koz/.local/miniforge3/envs/test/lib/python3.9/site-packages/click/core.py", line 1130, in __call__
+    return self.main(*args, **kwargs)
+  File "/Users/koz/.local/miniforge3/envs/test/lib/python3.9/site-packages/click/core.py", line 1055, in main
+    rv = self.invoke(ctx)
+  File "/Users/koz/.local/miniforge3/envs/test/lib/python3.9/site-packages/click/core.py", line 1657, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+  File "/Users/koz/.local/miniforge3/envs/test/lib/python3.9/site-packages/click/core.py", line 1657, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+  File "/Users/koz/.local/miniforge3/envs/test/lib/python3.9/site-packages/click/core.py", line 1404, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+  File "/Users/koz/.local/miniforge3/envs/test/lib/python3.9/site-packages/click/core.py", line 760, in invoke
+    return __callback(*args, **kwargs)
+  File "/Users/koz/.local/miniforge3/envs/test/lib/python3.9/site-packages/mlflow/models/cli.py", line 125, in predict
+    return _get_flavor_backend(
+  File "/Users/koz/.local/miniforge3/envs/test/lib/python3.9/site-packages/mlflow/pyfunc/backend.py", line 120, in predict
+    conda_env_name = get_or_create_conda_env(
+  File "/Users/koz/.local/miniforge3/envs/test/lib/python3.9/site-packages/mlflow/utils/conda.py", line 214, in get_or_create_conda_env
+    process._exec_cmd(
+  File "/Users/koz/.local/miniforge3/envs/test/lib/python3.9/site-packages/mlflow/utils/process.py", line 94, in _exec_cmd
+    raise ShellCommandException.from_completed_process(comp_process)
+mlflow.utils.process.ShellCommandException: Non-zero exit code: 1
+Command: ['/Users/koz/.local/miniforge3/bin/conda', 'env', 'create', '-n', 'mlflow-68c0ec35f0d6ca2df4c3c3872e3d889149327a36', '--file', '/private/var/tmp/deploy/model/conda.yaml']
+
 ```
