@@ -20,7 +20,12 @@ def go(config: DictConfig):
         # This was passed on the command line as a comma-separated list of steps
         steps_to_execute = config["main"]["execute_steps"].split(",")
     else:
-        assert isinstance(config["main"]["execute_steps"], list)
+        # 
+        # This assert is causing errors when execute_steps is not
+        # passed in as an arg.
+        #
+        # assert isinstance(config["main"]["execute_steps"], list)
+        #
         steps_to_execute = config["main"]["execute_steps"]
 
     # Download step
