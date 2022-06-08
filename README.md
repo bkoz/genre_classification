@@ -13,6 +13,8 @@ mlflow run . -P hydra_options="main.execute_steps='download,preprocess,check_dat
 mlflow run . -P hydra_options="main.project_name='genre_classification' main.execute_steps='download,preprocess,check_data,segregate,random_forest,evaluate'"
 ```
 
+`mlflow run -v version git-url` will run a branch but not a tag.
+
 `main.py` errors w/o passing in execute_steps
 
 ```
