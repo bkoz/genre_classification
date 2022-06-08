@@ -45,3 +45,14 @@ AssertionError
 Set the environment variable HYDRA_FULL_ERROR=1 for a complete stack trace.
 2022/06/07 19:34:10 ERROR mlflow.cli: === Run (ID '313c255c1ece4b2293b52a6225d2ca50') failed ===
 ```
+
+### Inference testing
+```
+conda create --name=test python=3.9.13 mlflow wandb
+
+wandb artifact get genre_classification/model_export:prod --root model
+wandb artifact get genre_classification/my_artifact_root_test.csv:latest
+  
+mlflow models predict -t json -i model/input_example.json -m model
+mlflow models predict -t csv -i artifacts/my_artifact_root_test.csv\:v0/my_artifact_root_test.csv -m model
+```
