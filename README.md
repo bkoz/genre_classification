@@ -1,6 +1,20 @@
 # genre_classification
-MLops Course 2 Exercise
 
+## MLops Course 2 Exercise
+
+### Development Environments
+
+RHEL9
+```
+$ wandb --version
+wandb, version 0.12.17
+(python-3.8.13) [ec2-user@ip-192-168-0-7 ~]$ mlflow --version
+mlflow, version 1.26.1
+```
+
+MacOS M1
+
+### Pipeline Components
 
 Component: download
 
