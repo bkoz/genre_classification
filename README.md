@@ -52,11 +52,19 @@ MacOS and RHEL x86_64
 
 ```
 conda create --name=test python=3.9.13 mlflow wandb
-
+conda activate test
 wandb artifact get genre_classification/model_export:prod --root model
 wandb artifact get genre_classification/my_artifact_root_test.csv:latest
-  
+```
+```
 mlflow models predict -t json -i model/input_example.json -m model
+
+2022/06/08 17:57:42 INFO mlflow.models.cli: Selected backend for flavor 'python_function'
+2022/06/08 17:57:44 INFO mlflow.utils.conda: Conda environment mlflow-68c0ec35f0d6ca2df4c3c3872e3d889149327a36 already exists.
+2022/06/08 17:57:44 INFO mlflow.pyfunc.backend: === Running command 'source /home/ec2-user/.local/miniforge3/bin/../etc/profile.d/conda.sh && conda activate mlflow-68c0ec35f0d6ca2df4c3c3872e3d889149327a36 1>&2 && python -c "from mlflow.pyfunc.scoring_server import _predict; _predict(model_uri='file:///home/ec2-user/model', input_path='model/input_example.json', output_path=None, content_type='json', json_format='split')"'
+["Rap", "RnB"]
+
+```
 mlflow models predict -t csv -i artifacts/my_artifact_root_test.csv\:v0/my_artifact_root_test.csv -m model
 ```
 
