@@ -56,6 +56,9 @@ conda activate test
 wandb artifact get genre_classification/model_export:prod --root model
 wandb artifact get genre_classification/my_artifact_root_test.csv:latest
 ```
+
+Had to edit `input_example.json` and change `NaN` to "".
+
 ```
 mlflow models predict -t json -i model/input_example.json -m model
 
